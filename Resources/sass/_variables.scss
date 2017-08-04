@@ -1,0 +1,25 @@
+/* 
+   Variables
+   ========================================================================== */
+
+$browse-icon-margin-right: 3px !default;
+
+$file-preview-bg: #fff !default;
+$file-preview-border: 1px solid #ccc !default;
+$file-preview-border-radius: 3px !default;
+$file-remove-btn-bg: #c9c9c9 !default;
+$file-remove-btn-bg-hover: darken($file-remove-btn-bg, 8%) !default;
+$file-remove-btn-color: #fff !default;
+
+$file-body-offset-right: 26px !default;
+
+$fileupload-errors: red !default;
+$fileupload-errors-font-size: 80% !default;
+
+$crop-width: 200px !default;
+$crop-area-width: 150px !default;
+$crop-area-height: 150px !default;
+$crop-controls-width: 150px !default;
+
+$input-crop-area-width: 200px !default;
+$input-crop-area-height: 200px !default;

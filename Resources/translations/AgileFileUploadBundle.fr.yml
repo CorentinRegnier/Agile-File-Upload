@@ -1,0 +1,9 @@
+form:
+    remove_label: Supprimer
+    browse_label: Parcourir
+    unknown_error_message: Désolé, une erreur est survenue
+    pending_uploads_label: Téléchargement en cours...
+
+flashes:
+    delete:
+        success: Le fichier a bien été supprimé

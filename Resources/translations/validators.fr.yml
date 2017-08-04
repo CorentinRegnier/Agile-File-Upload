@@ -1,0 +1,5 @@
+
+agile_fileupload:
+    file:
+        too_large: "Le fichier est trop gros ({{ size }} {{ suffix }}). La taille maximum autorisé est de {{ limit }} {{ suffix }}."
+        mime_type: "Format de fichier invalide ({{ type }}). Les formats autorisés sont {{ types }}."

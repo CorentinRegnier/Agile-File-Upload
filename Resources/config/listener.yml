@@ -1,0 +1,21 @@
+parameters:
+    agile_fileupload.listener.uploadable.class: AgileFileUploadBundle\EventListener\UploadableListener
+
+services:
+    agile_fileupload.listener.uploadable:
+        public: false
+        class: "%agile_fileupload.listener.uploadable.class%"
+        arguments:
+            - "@stof_doctrine_extensions.uploadable.manager"
+        tags:
+            - { name: doctrine.event_subscriber }
+
+    agile_fileupload.doctrine.listener.mapping:
+        class: AgileFileUploadBundle\EventListener\MappingListener
+        arguments:
+            - "%agile_fileupload.model.file.class%"
+            - "%agile_fileupload.model.file.table%"
+            - "%agile_fileupload.repository.file%"
+        tags:
+            - { name: doctrine.event_subscriber, priority: 250 }
+

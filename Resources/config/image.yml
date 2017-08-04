@@ -1,0 +1,18 @@
+
+parameters:
+    agile_fileupload.image_manager.class: AgileFileUploadBundle\Manager\ImageManager
+    agile_fileupload.twig.extension.image.class: AgileFileUploadBundle\Twig\Extension\ImageExtension
+
+services:
+    agile_fileupload.image_manager:
+        class: "%agile_fileupload.image_manager.class%"
+        arguments:
+            - "@liip_imagine.cache.manager"
+
+    agile_fileupload.twig.extension.image:
+        public: false
+        class: "%agile_fileupload.twig.extension.image.class%"
+        arguments:
+            - "@agile_fileupload.image_manager"
+        tags:
+            - { name: twig.extension, alias: agile_image }

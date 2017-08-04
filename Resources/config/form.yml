@@ -1,0 +1,26 @@
+parameters:
+    agile_fileupload.form.file.type.class: AgileFileUploadBundle\Form\Type\FileType
+    agile_fileupload.form.default.origin_filter_name: upload_large
+    agile_fileupload.form.default.filter_name: upload_small
+
+services:
+    agile_fileupload.form.file.type:
+        class: "%agile_fileupload.form.file.type.class%"
+        arguments:
+            - "%agile_fileupload.model.file.class%"
+            - "@doctrine"
+            - "@agile_fileupload.listener.uploadable"
+            - "@router"
+            - "@translator"
+            - "%agile_fileupload.form.default.filter_name%"
+            - "%agile_fileupload.form.default.origin_filter_name%"
+        tags:
+            - { name: form.type, alias: agile_file }
+
+    agile_fileupload.form.tinymce.plugin.agile_image_upload:
+        class: AgileFileUploadBundle\Form\TinyMce\ImageUploadExtension
+        arguments:
+            - "@router"
+            - "@security.csrf.token_manager"
+        tags:
+            - { name: agile_kernel.tinymce_extension }

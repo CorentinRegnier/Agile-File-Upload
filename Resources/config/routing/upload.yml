@@ -1,0 +1,7 @@
+agile_file_upload_file_upload:
+    path:     /files/upload
+    defaults: { _controller: AgileFileUploadBundle:File:upload }
+
+agile_file_upload_file_delete:
+    path:     /files/delete
+    defaults: { _controller: AgileFileUploadBundle:File:delete }

@@ -1,0 +1,9 @@
+form:
+    remove_label: Remove
+    browse_label: Browse
+    unknown_error_message: Sorry, an error has occured
+    pending_uploads: Pending upload...
+
+flashes:
+    delete:
+        success: File has been removed

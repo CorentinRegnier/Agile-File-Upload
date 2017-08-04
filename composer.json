@@ -1,0 +1,35 @@
+{
+  "name": "cregnier/fileupload-bundle",
+  "description": "Agile File Upload Bundle",
+  "homepage": "https://github.com/MWCorentin/Agile-File-Upload",
+  "type": "symfony-bundle",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Corentin Régnier",
+      "email": "corentin.regnier59@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "AgileFileUploadBundle\\": ""
+    }
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://satis.corentinregnier.fr"
+    }
+  ],
+  "require": {
+    "cregnier/kernel-bundle": "^1.0",
+    "liip/imagine-bundle": "^1.5",
+    "kriswallsmith/buzz": "~0.7",
+    "cocur/slugify": "^2.2"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0.x"
+    }
+  }
+}

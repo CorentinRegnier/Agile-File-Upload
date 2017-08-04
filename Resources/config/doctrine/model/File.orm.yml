@@ -1,0 +1,44 @@
+AgileFileUploadBundle\Model\File:
+    type: mappedSuperclass
+    gedmo:
+        uploadable:
+            allowOverwrite: false
+            appendNumber: true
+            pathMethod: getPath
+            callback: callbackMethod
+            filenameGenerator: AgileFileUploadBundle\Model\FilenameGenerator
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        path:
+            type: string
+            length: 255
+            gedmo:
+                - uploadableFilePath
+        originalFilename:
+            type: string
+            length: 255
+        extension:
+            type: string
+            length: 10
+        token:
+            type: string
+            length: 255
+            nullable: true
+        mimeType:
+            type: string
+            length: 100
+            gedmo:
+                - uploadableFileMimeType
+        size:
+            type: decimal
+            gedmo:
+                - uploadableFileSize
+        type:
+            type: string
+            length: 255
+            nullable: true
+

@@ -1,0 +1,3 @@
+_upload:
+    resource: "@AgileFileUploadBundle/Resources/config/routing/upload.yml"
+    prefix: /

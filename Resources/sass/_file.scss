@@ -1,0 +1,116 @@
+/*
+   Browse button
+   ========================================================================== */
+
+.ag-fileupload-browse {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+
+    .fa {
+        margin-right: $browse-icon-margin-right;
+    }
+    input[type="file"] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 0;
+        height: 100%;
+        font-size: 200px !important;
+        direction: ltr;
+        cursor: pointer;
+        @include opacity(0);
+        -ms-filter: 'alpha(opacity=0)';
+        font-size: 100%;
+    }
+}
+
+.ag-fileupload-browse-info {
+    display: inline-block;
+    margin-left: 15px;
+    vertical-align: middle;
+    line-height: 1em;
+}
+
+/*
+   Files Preview
+   ========================================================================== */
+
+.ag-fileupload-placeholder {
+    margin-top: 15px;
+}
+
+.ag-file-preview {
+
+    &:first-child {
+        margin-top: 15px;
+    }
+}
+
+.ag-file-preview, .ag-fileupload-placeholder {
+    position: relative;
+    padding: 10px;
+    border: $file-preview-border;
+    border-radius: $file-preview-border-radius;
+    background-color: $file-preview-bg;
+}
+
+.ag-file-body {
+    padding-right: $file-body-offset-right;
+}
+
+.ag-file-icon {
+    display: block;
+}
+
+.ag-remove-file-btn {
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    text-align: center;
+    background-color: $file-remove-btn-bg;
+    color: $file-remove-btn-color !important;
+
+    &:hover,
+    &:focus {
+        background-color: $file-remove-btn-bg-hover;
+    }
+}
+
+.ag-file-name {
+    display: block;
+    word-break: break-all;
+    text-decoration: underline;
+}
+
+.ag-progress {
+    margin: 10px 0 0;
+}
+
+.ag-progress-bar {
+    width: 0%;
+}
+
+.ag-fileupload-errors {
+    color: $fileupload-errors;
+    font-size: $fileupload-errors-font-size;
+}
+
+/*
+   Responsive
+   ========================================================================== */
+
+@media (max-width: $screen-phone - 1) {
+
+    .ag-file-icon {
+
+        img {
+            max-width: 50px;
+        }
+    }
+    .ag-fileupload-browse-info {
+        display: block;
+        margin: 10px 0 0;
+    }
+}

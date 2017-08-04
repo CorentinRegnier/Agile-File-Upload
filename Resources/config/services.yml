@@ -1,0 +1,30 @@
+parameters:
+    agile_fileupload.file_downloader.class: AgileFileUploadBundle\Downloader\FileDownloader
+    agile_fileupload.file_upload_manager.class: AgileFileUploadBundle\Model\FileUploadManager
+    agile_fileupload.http_client.class: Buzz\Client\Curl
+
+imports:
+    - { resource: form.yml }
+    - { resource: listener.yml }
+
+services:
+    agile_fileupload.http_client:
+        public: false
+        class: "%agile_fileupload.http_client.class%"
+
+    agile_fileupload.file_downloader:
+        class: "%agile_fileupload.file_downloader.class%"
+        arguments:
+            - "@agile_fileupload.http_client"
+            - "@stof_doctrine_extensions.uploadable.manager"
+            - "%agile_fileupload.model.file.class%"
+
+    agile_fileupload.file_upload_manager:
+        class: "%agile_fileupload.file_upload_manager.class%"
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@form.factory"
+            - "@agile_fileupload.image_manager"
+            - "@assets.packages"
+            - "@translator"
+            - "@request_stack"

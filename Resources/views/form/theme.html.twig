@@ -1,0 +1,109 @@
+{% trans_default_domain 'AgileFileUploadBundle' %}
+
+{% block agile_file_widget %}
+    {% spaceless %}
+        <div id="{{ id }}" class="{{ attr.class|default('') is not empty ? attr.class ~ ' ' : '' }}ag-fileupload">
+            <div class="ag-browse clearfix">
+                {% if browse_label is not empty %}
+                    {{ block('browse_button') }}
+                {% endif %}
+                {{ form_widget(form.id) }}
+            </div>
+
+            <div class="ag-template" agyle="display:none">
+                {% set file = null %}
+                {{ block('file_preview') }}
+            </div>
+            {% if placeholder is not empty %}
+                {{ block('image_placeholder') }}
+            {% endif %}
+            {% if display_preview %}
+                <div class="ag-files">
+                    {% for file in files %}
+                        {% if file.id %}
+                            {{ block('file_preview') }}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+        {{ form_errors(form.file) }}
+
+        {% if app.request.xmlHttpRequest == true %}
+            <script>$('#{{ id }}').agileFileUpload({{ js_options|raw }});</script>
+        {% else %}
+            {{ append_js_code("$(function () {$('#" ~ id ~ "').agileFileUpload(" ~ js_options|raw ~ ");});") }}
+        {% endif %}
+    {% endspaceless %}
+{% endblock %}
+
+{% block browse_button %}
+    {% spaceless %}
+        <span class="ag-fileupload-browse btn btn-default">
+            <i class="fa fa-upload"></i>
+            {{ browse_label|trans({}, translation_domain) }}
+            {{ form_widget(form.file) }}
+        </span>
+        {% if file_restriction is not empty %}
+            <span class="ag-fileupload-browse-info">{{ file_restriction|trans({}, translation_domain)|raw }}</span>
+        {% endif %}
+    {% endspaceless %}
+{% endblock %}
+
+{% block image_placeholder %}
+    <div class="ag-fileupload-placeholder media" {% if files|length > 0 %} style="display:none;"{% endif %}>
+        <div class="media-left">
+            <img src="{{ placeholder }}">
+        </div>
+        <div class="media-body">
+            {% if file_label %}
+                <div class="upload-filelabel">{{ file_label|trans({}, translation_domain)|raw }}</div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block file_preview %}
+    <div class="ag-file-preview media">
+        <a class="ag-file-open-btn media-left" href="{{ file and file.url ? asset(file.url) : '#' }}"
+           target="_blank">
+            <span class="ag-file-icon">
+                {% if file and file.mime_type %}
+                    {% if file.mime_type matches '{^image/}' %}
+                        <img src="{{ file.url|imagine_filter(filter_name) }}">
+                    {% else %}
+                        <div class="fa fa-{{ file.icon }}"></div>
+                    {% endif %}
+                {% elseif placeholder is not empty %}
+                    <img src="{{ placeholder }}">
+                {% endif %}
+            </span>
+        </a>
+
+        <div class="ag-file-body media-body">
+            {% if display_preview_name %}
+                <a class="ag-file-name" href="{{ file and file.url ? asset(file.url) : '#' }}" target="_blank">
+                    {{ file ? file.name : null }}
+                </a>
+            {% endif %}
+
+            {% if file_label %}
+                <div class="upload-filelabel">{{ file_label|trans({}, translation_domain)|raw }}</div>
+            {% endif %}
+
+            {% if not disabled %}
+                <a href="#" {% if file %}data-file-id="{{ file.id }}"{% endif %} class="ag-remove-file-btn btn btn-xs" title="{{ remove_file_label|trans({}, translation_domain)|raw }}">
+                    <i class="fa fa-trash"></i>
+                </a>
+            {% endif %}
+
+            <div class="ag-fileupload-errors"></div>
+        </div>
+
+        {% if not file %}
+            <div class="ag-progress progress active">
+                <div class="ag-progress-bar progress-bar progress-bar-primary" role="progressbar"></div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
